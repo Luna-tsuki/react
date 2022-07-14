@@ -1,0 +1,30 @@
+li {
+  list-style: none;
+  line-height: 30px;
+}
+.input-task {
+  width: 200px;
+  margin-left: 10px;
+}
+.month {
+  width: 50px;
+  margin-left: 10px;
+}
+.date {
+  width: 50px;
+  margin: 0 10px;
+}
+.task-text {
+  display: inline-block;
+  width: 200px;
+  text-align: left;
+}
+
+.time {
+  display: inline-block;
+  width: 100px;
+  text-align: left;
+}
+.toggle {
+  margin: 0 10px;
+}
