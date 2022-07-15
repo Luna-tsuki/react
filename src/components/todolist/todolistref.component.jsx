@@ -1,46 +1,62 @@
-import { useState } from "react";
-import "./todolist.styles.css";
+import { useState, useEffect, useRef } from "react";
+import "./todolistref.styles.css";
+import axios from "axios";
 
-const TodoList = () => {
+const TodoListRef = () => {
   //设置todo初始值
   const initialState = [
     {
       task: "Learn vue.js",
+      year: "2022",
       month: "1",
-      date: "2",
+      day: "2",
       isCompleted: false,
     },
   ];
 
   //解析初始值
   const [todos, setTodos] = useState(initialState);
+  const taskRef = useRef(null);
+  const yearRef = useRef(null);
+  const monthRef = useRef(null);
+  const dayRef = useRef(null);
 
-  //保存每次新增的task,month,date值
-  const [task, setTask] = useState("");
-  const [month, setMonth] = useState("");
-  const [date, setDate] = useState("");
-
-  //input输入值后，改变task,month,date值
-  const handleNewTask = (event) => {
-    setTask(event.target.value);
-  };
-  const handleNewMonth = (event) => {
-    setMonth(event.target.value);
-  };
-  const handleNewDate = (event) => {
-    setDate(event.target.value);
-  };
+  //1.查找
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/todos")
+      .then((response) => response.data)
+      .then((result) => setTodos(result.data));
+  }, []);
 
   //每次点击add提交后，更新todos值，并且清空task值
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (task === "" || month === "" || date === "") {
+
+    let taskref = taskRef.current.value;
+    let yearref = yearRef.current.value;
+    let monthref = monthRef.current.value;
+    let dayref = dayRef.current.value;
+
+    if (taskref === "" || yearref === "" || monthref === "" || dayref === "") {
       return alert("请输入内容");
     }
-    setTodos((todos) => [...todos, { task, month, date, isCompleted: false }]);
-    setTask("");
-    setMonth("");
-    setDate("");
+
+    setTodos([
+      ...todos,
+      {
+        task: taskref,
+        year: yearref,
+        month: monthref,
+        day: dayref,
+        isCompleted: false,
+      },
+    ]);
+
+    taskRef.current.value = "";
+    yearRef.current.value = "";
+    monthRef.current.value = "";
+    dayRef.current.value = "";
   };
 
   //点击Remove，根据li上的index删除对应的todo子项
@@ -51,7 +67,7 @@ const TodoList = () => {
   };
 
   //点击Toggle，todo的子项被划一条横线
-  const handleUpdateTask = (index) => {
+  const handleUpdayTask = (index) => {
     let newTodos = todos.map((todo, todoIndex) => {
       if (todoIndex === index) {
         todo.isCompleted = !todo.isCompleted;
@@ -64,11 +80,13 @@ const TodoList = () => {
   // 根据时间排序
   const handleSortByTime = () => {
     todos.sort((a, b) => {
+      let aYear = parseInt(a.year);
+      let bYear = parseInt(b.year);
       let aMonth = parseInt(a.month);
       let bMonth = parseInt(b.month);
-      let aDate = parseInt(a.date);
-      let bDate = parseInt(b.date);
-      return aMonth - bMonth || aDate - bDate;
+      let aDay = parseInt(a.day);
+      let bDay = parseInt(b.day);
+      return aYear - bYear || aMonth - bMonth || aDay - bDay;
     });
     setTodos([...todos]);
   };
@@ -77,33 +95,18 @@ const TodoList = () => {
   console.log("render");
   return (
     <div>
-      <h1>ToDo List</h1>
-      {/* 提交task表单 */}
-      <form onSubmit={handleSubmit}>
-        Add a todo
-        <input
-          value={task}
-          placeholder="Add New Task"
-          onChange={handleNewTask}
-          className="input-task"
-        />
-        <input
-          value={month}
-          placeholder="Month"
-          onChange={handleNewMonth}
-          className="month"
-        />
-        <input
-          value={date}
-          placeholder="Date"
-          onChange={handleNewDate}
-          className="date"
-        />
-        <button type="submit">Add</button>
-      </form>
+      <h1>ToDo List Ref</h1>
+      {/* 输入task */}
+      Add a todo
+      <input placeholder="Add New Task" ref={taskRef} className="input-task" />
+      <input placeholder="Year" ref={yearRef} className="year" />
+      <input placeholder="Month" ref={monthRef} className="month" />
+      <input placeholder="Day" ref={dayRef} className="day" />
+      {/* 提交button */}
+      <button onClick={handleSubmit}>Add</button>
       <br />
-      {/* 根据时间排序 */}
-      <button type="submit" onClick={() => handleSortByTime()}>
+      {/* 根据时间排序button */}
+      <button type="submit" className="sort" onClick={() => handleSortByTime()}>
         Sort By Time
       </button>
       {/* todo子项列表 */}
@@ -124,12 +127,12 @@ const TodoList = () => {
                 textDecoration: todo.isCompleted ? "line-through" : "none",
               }}
             >
-              {todo.month}/{todo.date}
+              {todo.year}/{todo.month}/{todo.day}
             </span>
             <button
               className="toggle"
               type="submit"
-              onClick={() => handleUpdateTask(index)}
+              onClick={() => handleUpdayTask(index)}
             >
               Toggle
             </button>
@@ -146,4 +149,4 @@ const TodoList = () => {
     </div>
   );
 };
-export default TodoList;
+export default TodoListRef;

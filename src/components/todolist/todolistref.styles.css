@@ -9,11 +9,15 @@ li {
   width: 200px;
   margin-left: 10px;
 }
+.year {
+  width: 50px;
+  margin-left: 10px;
+}
 .month {
   width: 50px;
   margin-left: 10px;
 }
-.date {
+.day {
   width: 50px;
   margin: 0 10px;
 }
