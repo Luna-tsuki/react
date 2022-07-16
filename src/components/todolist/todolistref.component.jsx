@@ -3,25 +3,14 @@ import "./todolistref.styles.css";
 import axios from "axios";
 
 const TodoListRef = () => {
-  //设置todo初始值
-  const initialState = [
-    {
-      task: "Learn vue.js",
-      year: "2022",
-      month: "1",
-      day: "2",
-      isCompleted: false,
-    },
-  ];
-
   //解析初始值
-  const [todos, setTodos] = useState(initialState);
+  const [todos, setTodos] = useState([]);
   const taskRef = useRef(null);
   const yearRef = useRef(null);
   const monthRef = useRef(null);
   const dayRef = useRef(null);
 
-  //1.查找
+  //1.查找serach
   useEffect(() => {
     axios
       .get("http://localhost:8080/todos")
@@ -29,7 +18,7 @@ const TodoListRef = () => {
       .then((result) => setTodos(result.data));
   }, []);
 
-  //每次点击add提交后，更新todos值，并且清空task值
+  //2.增加insert
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -42,16 +31,19 @@ const TodoListRef = () => {
       return alert("请输入内容");
     }
 
-    setTodos([
-      ...todos,
-      {
+    axios
+      .post("http://localhost:8080/todos", {
         task: taskref,
         year: yearref,
         month: monthref,
         day: dayref,
-        isCompleted: false,
-      },
-    ]);
+        status: 1,
+      })
+      .then((response) => response.data)
+      .then((result) => setTodos(result.data))
+      .then(() => {
+        alert("Add insert succeed!");
+      });
 
     taskRef.current.value = "";
     yearRef.current.value = "";
@@ -59,25 +51,41 @@ const TodoListRef = () => {
     dayRef.current.value = "";
   };
 
-  //点击Remove，根据li上的index删除对应的todo子项
-  const handleRemoveTask = (index) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+  //3.更新update
+  const handleUpdayTask = (taskId, status) => {
+    axios
+      .put(`${"http://localhost:8080/todos"}/${taskId}`, {
+        status: status,
+      })
+      .then((response) => response.data)
+      .then((result) => {
+        let newTodos = todos.map((todo) => {
+          if (todo.taskId === taskId) {
+            todo.status = result.data[0].status;
+          }
+          return todo;
+        });
+        setTodos(newTodos);
+      })
+      .then(() => {
+        alert("Toggle update succeed!");
+      });
   };
 
-  //点击Toggle，todo的子项被划一条横线
-  const handleUpdayTask = (index) => {
-    let newTodos = todos.map((todo, todoIndex) => {
-      if (todoIndex === index) {
-        todo.isCompleted = !todo.isCompleted;
-      }
-      return todo;
-    });
-    setTodos(newTodos);
+  //4.删除remove
+  const handleRemoveTask = (taskId) => {
+    axios
+      .delete(`${"http://localhost:8080/todos"}/${taskId}`)
+      .then(() => {
+        const newTodos = todos.filter((item) => item.taskId !== taskId);
+        setTodos(newTodos);
+      })
+      .then(() => {
+        alert("Deleted remove succeed!");
+      });
   };
 
-  // 根据时间排序
+  // 根据时间排序sort
   const handleSortByTime = () => {
     todos.sort((a, b) => {
       let aYear = parseInt(a.year);
@@ -91,8 +99,8 @@ const TodoListRef = () => {
     setTodos([...todos]);
   };
 
-  //返回
   console.log("render");
+  //返回html
   return (
     <div>
       <h1>ToDo List Ref</h1>
@@ -111,12 +119,12 @@ const TodoListRef = () => {
       </button>
       {/* todo子项列表 */}
       <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
+        {todos.map((todo) => (
+          <li key={todo.taskId}>
             <span
               className="task-text"
               style={{
-                textDecoration: todo.isCompleted ? "line-through" : "none",
+                textDecoration: todo.status !== 1 ? "line-through" : "none",
               }}
             >
               {todo.task}
@@ -124,7 +132,7 @@ const TodoListRef = () => {
             <span
               className="time"
               style={{
-                textDecoration: todo.isCompleted ? "line-through" : "none",
+                textDecoration: todo.status !== 1 ? "line-through" : "none",
               }}
             >
               {todo.year}/{todo.month}/{todo.day}
@@ -132,14 +140,14 @@ const TodoListRef = () => {
             <button
               className="toggle"
               type="submit"
-              onClick={() => handleUpdayTask(index)}
+              onClick={() => handleUpdayTask(todo.taskId, todo.status)}
             >
               Toggle
             </button>
             <button
               className="remove"
               type="submit"
-              onClick={() => handleRemoveTask(index)}
+              onClick={() => handleRemoveTask(todo.taskId)}
             >
               Remove
             </button>
