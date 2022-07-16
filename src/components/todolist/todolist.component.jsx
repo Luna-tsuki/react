@@ -33,7 +33,7 @@ const TodoList = () => {
 
   //每次点击add提交后，更新todos值，并且清空task值
   const handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     if (task === "" || month === "" || date === "") {
       return alert("请输入内容");
     }
