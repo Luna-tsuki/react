@@ -1,0 +1,26 @@
+.goods-container {
+  display: flex;
+  flex-direction: column;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  width: calc((100% - 125px) / 6 - 0.1px);
+  padding: 12.5px 12.5px;
+  &:first-child {
+    padding-left: 0;
+  }
+  &:last-child {
+    padding-right: 0;
+  }
+  .goodsName {
+    font-size: 12px;
+    text-align: left;
+  }
+  .price {
+    text-align: left;
+    .sellingPrice {
+      font-size: 22px;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+}

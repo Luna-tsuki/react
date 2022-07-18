@@ -1,0 +1,27 @@
+.goods-container {
+  display: flex;
+  flex-direction: column;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  width: calc((100% - 125px) / 6 - 0.1px);
+  padding: 12.5px 12.5px;
+}
+.goods-container:first-child {
+  padding-left: 0;
+}
+.goods-container:last-child {
+  padding-right: 0;
+}
+.goods-container .goodsName {
+  font-size: 12px;
+  text-align: left;
+}
+.goods-container .price {
+  text-align: left;
+}
+.goods-container .price .sellingPrice {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+}/*# sourceMappingURL=goodscard.styles.css.map */
