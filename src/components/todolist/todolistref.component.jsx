@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import "./todolistref.styles.css";
 import axios from "axios";
+import React from "react";
+import Button from "@mui/material/Button";
+
+const localhost = axios.create({
+  baseURL: "http://localhost:8080/todos",
+});
 
 const TodoListRef = () => {
   //解析初始值
@@ -9,16 +15,22 @@ const TodoListRef = () => {
   const yearRef = useRef(null);
   const monthRef = useRef(null);
   const dayRef = useRef(null);
+  const [error, setError] = React.useState(null);
 
-  //1.查找serach
+  //1.get 查找SELECT
   useEffect(() => {
     axios
       .get("http://localhost:8080/todos")
       .then((response) => response.data)
-      .then((result) => setTodos(result.data));
+      .then((result) => setTodos(result.data))
+      .catch((error) => {
+        setError(error);
+      });
   }, []);
+  if (error) return `Error: ${error.message}`;
+  if (!todos) return "No todos!";
 
-  //2.增加insert
+  //2.post 增加INSERT
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -51,7 +63,7 @@ const TodoListRef = () => {
     dayRef.current.value = "";
   };
 
-  //3.更新update
+  //3.put 更新UPDATE
   const handleUpdayTask = (taskId, status) => {
     axios
       .put(`${"http://localhost:8080/todos"}/${taskId}`, {
@@ -72,18 +84,26 @@ const TodoListRef = () => {
       });
   };
 
-  //4.删除remove
+  //4.delete 删除DELETE
   const handleRemoveTask = (taskId) => {
-    axios
-      .delete(`${"http://localhost:8080/todos"}/${taskId}`)
-      .then(() => {
-        const newTodos = todos.filter((item) => item.taskId !== taskId);
-        setTodos(newTodos);
-      })
-      .then(() => {
-        alert("Deleted remove succeed!");
-      });
+    // axios
+    //   .delete(`${"http://localhost:8080/todos"}/${taskId}`)
+    //   .then(() => {
+    //     const newTodos = todos.filter((item) => item.taskId !== taskId);
+    //     setTodos(newTodos);
+    //   })
+    //   .then(() => {
+    //     alert("Remove deleted succeed!");
+    //   });
+
+    deletePost(taskId);
   };
+
+  async function deletePost(taskId) {
+    await localhost.delete(`/${taskId}`);
+    const newTodos = todos.filter((item) => item.taskId !== taskId);
+    setTodos(newTodos);
+  }
 
   // 根据时间排序sort
   const handleSortByTime = () => {
@@ -111,7 +131,10 @@ const TodoListRef = () => {
       <input placeholder="Month" ref={monthRef} className="month" />
       <input placeholder="Day" ref={dayRef} className="day" />
       {/* 提交button */}
-      <button onClick={handleSubmit}>Add</button>
+      {/* <button onClick={handleSubmit}>Add</button> */}
+      <Button variant="contained" onClick={handleSubmit}>
+        Add
+      </Button>
       <br />
       {/* 根据时间排序button */}
       <button type="submit" className="sort" onClick={() => handleSortByTime()}>

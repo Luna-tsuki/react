@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import TodoListExample from "./components/todolist/todolist-example";
 import TodoList from "./components/todolist/todolist.component";
 import TodoListRef from "./components/todolist/todolistref.component";
+import Recommend from "./components/recommend/recommend.component";
+import UserHistory from "./components/user-history/user-history.component.jsx";
 
 //----------------------------todolist 项目----------------------------
 const App = () => {
@@ -16,6 +18,8 @@ const App = () => {
       {/* <TodoListExample /> */}
       {/* <TodoList /> */}
       <TodoListRef />
+      <Recommend />
+      <UserHistory />
     </div>
   );
 };

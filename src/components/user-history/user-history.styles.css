@@ -1,0 +1,10 @@
+.main {
+  margin: 0 auto;
+  max-width: 1240px;
+  box-sizing: border-box;
+}
+.main .historys {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}/*# sourceMappingURL=user-history.styles.css.map */
