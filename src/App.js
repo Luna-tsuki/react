@@ -1,25 +1,28 @@
 // import { Component } from "react";
 import CardList from "./components/card-list/card-list.component";
-
 import SearchBox from "./components/search-box/search-box.component";
+import { useState, useEffect } from "react";
 import "./App.css";
 
-import { useState, useEffect } from "react";
 import TodoListExample from "./components/todolist/todolist-example";
 import TodoList from "./components/todolist/todolist.component";
 import TodoListRef from "./components/todolist/todolistref.component";
 import Recommend from "./components/recommend/recommend.component";
 import UserHistory from "./components/user-history/user-history.component.jsx";
+import Category from "./components/category/category.component.jsx";
+import CategoryPro from "./components/category/categoryPro.component.jsx";
 
-//----------------------------todolist 项目----------------------------
+//-----------------------------------------------------------------------------------
 const App = () => {
   return (
     <div className="App">
-      {/* <TodoListExample /> */}
+      <Category />
+      {/* <CategoryPro /> */}
+      {/* <UserHistory /> */}
+      {/* <Recommend /> */}
+      {/* <TodoListRef /> */}
       {/* <TodoList /> */}
-      <TodoListRef />
-      <Recommend />
-      <UserHistory />
+      {/* <TodoListExample /> */}
     </div>
   );
 };
