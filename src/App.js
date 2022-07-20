@@ -9,21 +9,41 @@ import TodoList from "./components/todolist/todolist.component";
 import TodoListRef from "./components/todolist/todolistref.component";
 import Recommend from "./components/recommend/recommend.component";
 import UserHistory from "./components/user-history/user-history.component.jsx";
-import Category from "./components/category/category.component.jsx";
-import CategoryPro from "./components/category/categoryPro.component.jsx";
+import CategoryPro from "./myroutes/category/categoryPro.component.jsx";
 
+import { Routes, Route } from "react-router-dom";
+import Navigation from "./routes/navigation/navigation.component.jsx";
+import Home from "./routes/home/home.component.jsx";
+
+import Category from "./myroutes/category/category.component.jsx";
+import Bed from "./myroutes/bed/bed.component.jsx";
 //-----------------------------------------------------------------------------------
+
+const Shop = () => {
+  return <h1>Shop</h1>;
+};
+
 const App = () => {
   return (
-    <div className="App">
-      <Category />
-      {/* <CategoryPro /> */}
-      {/* <UserHistory /> */}
-      {/* <Recommend /> */}
-      {/* <TodoListRef /> */}
-      {/* <TodoList /> */}
-      {/* <TodoListExample /> */}
-    </div>
+    <Routes>
+      <Route path="/" element={<Category />}>
+        {/* <Route index element={<Home />} /> */}
+        <Route path="bed" element={<Bed />} />
+      </Route>
+
+      <Route path="/categorypro" element={<CategoryPro />} />
+      <Route path="/userhistory" element={<UserHistory />} />
+      <Route path="/recommend" element={<Recommend />} />
+      <Route path="/todolistref" element={<TodoListRef />} />
+      <Route path="/todolist" element={<TodoList />} />
+    </Routes>
+
+    // <Routes>
+    //   <Route path="/" element={<Navigation />}>
+    //     <Route index element={<Home />} />
+    //     <Route path="shop" element={<Shop />} />
+    //   </Route>
+    // </Routes>
   );
 };
 
