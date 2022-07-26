@@ -118,7 +118,13 @@ const Category = () => {
                               key={list.categoryId}
                               onClick={categoryDisappear}
                             >
-                              <Link to={`/itemlist/${list.categoryId}`}>
+                              <Link
+                                to={`/itemlist/${list.categoryId}`}
+                                state={{
+                                  parentCategoryName: category.categoryName,
+                                  childrenCategoryName: list.categoryName,
+                                }}
+                              >
                                 {list.categoryName}
                                 {list.categoryId}
                               </Link>

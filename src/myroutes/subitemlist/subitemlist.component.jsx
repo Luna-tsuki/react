@@ -1,4 +1,4 @@
-import { Outlet, Link, useParams } from "react-router-dom";
+import { Outlet, Link, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect, Fragment } from "react";
 import "./subitemlist.styles.css";
 import axios from "axios";
@@ -95,12 +95,17 @@ const SubItemList = () => {
     ],
   };
 
-  //接收从首页category传进来的categoryId
+  //接收从二级页面itemlist的link传进来的categoryId
   const { categoryIdString, subCategoryIdString } = useParams();
   const categoryId = parseInt(categoryIdString);
   const subCategoryId = parseInt(subCategoryIdString);
   let goodsCategoryId = categoryId;
   let goodsSubCategoryId = subCategoryId;
+
+  //接收从二级页面itemlist的link传进来的categoryName
+  const { state } = useLocation();
+  const { parentCategoryName, childrenCategoryName, subChildrenCategoryName } =
+    state;
 
   //初始化 post 信息
   const [ItemLists, setItemLists] = useState(initialState);
@@ -120,7 +125,7 @@ const SubItemList = () => {
       const response = await localhost.post("/ItemList/new", {
         limit: 10,
         cols: [],
-        goodsCategoryId: goodsCategoryId,
+        goodsCategoryId: goodsSubCategoryId,
         orderBy: orderBy,
         ascOrDesc: ascOrDesc,
         pageNo: pageNo,
@@ -219,7 +224,19 @@ const SubItemList = () => {
           ホーム
         </Link>
         <span className="leadname"> > </span>
-        <span className="leadname">敷きパッド・ベッドパッド【通販】</span>
+        <span className="leadname">{parentCategoryName}</span>
+        <span className="leadname"> > </span>
+        <Link
+          to={`/itemlist/${categoryId}`}
+          state={{
+            parentCategoryName: parentCategoryName,
+            childrenCategoryName: childrenCategoryName,
+          }}
+        >
+          <span className="leadname">{childrenCategoryName}</span>
+        </Link>
+        <span className="leadname"> > </span>
+        <span className="leadname">{subChildrenCategoryName}</span>
       </div>
       <div className="page_subcategory">
         <div className="sidebar">

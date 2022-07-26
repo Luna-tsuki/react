@@ -1,4 +1,4 @@
-import { Outlet, Link, useParams } from "react-router-dom";
+import { Outlet, Link, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect, Fragment } from "react";
 import "./itemlist.styles.css";
 import axios from "axios";
@@ -95,10 +95,13 @@ const ItemList = () => {
     ],
   };
 
-  //接收从首页category传进来的categoryId
+  //接收从首页category的link传进来的categoryId
   const { categoryIdString } = useParams();
   const categoryId = parseInt(categoryIdString);
   const goodsCategoryId = categoryId;
+  //接收从首页category的link传进来的categoryName
+  const { state } = useLocation();
+  const { parentCategoryName, childrenCategoryName } = state;
 
   //初始化 post 信息
   const [ItemLists, setItemLists] = useState(initialState);
@@ -194,7 +197,7 @@ const ItemList = () => {
     }
     setPgaeNo(1);
   };
-  //function 点击clear按钮删除 col
+  //function 点击clear按钮删除属性 col
   const handleColClear = (col) => {
     //删除 userSelectedCols 的col
     setUserSelectedCols(userSelectedCols.filter((item) => item !== col));
@@ -219,7 +222,9 @@ const ItemList = () => {
           ホーム
         </Link>
         <span className="leadname"> > </span>
-        <span className="leadname">敷きパッド・ベッドパッド【通販】</span>
+        <span className="leadname">{parentCategoryName}</span>
+        <span className="leadname"> > </span>
+        <span className="leadname">{childrenCategoryName}</span>
       </div>
       <div className="page_subcategory">
         <div className="sidebar">
@@ -235,6 +240,11 @@ const ItemList = () => {
                   <Link
                     key={subcategory.goodsCategoryId}
                     to={`/itemlist/${goodsCategoryId}/${subcategory.goodsCategoryId}`}
+                    state={{
+                      parentCategoryName: parentCategoryName,
+                      childrenCategoryName: childrenCategoryName,
+                      subChildrenCategoryName: subcategory.categoryName,
+                    }}
                   >
                     <li>
                       <button className="subcategory_button">
@@ -268,11 +278,6 @@ const ItemList = () => {
                 );
               })}
             </div>
-            {/* className={pageNo === i ? "active" : null} */}
-            {/* className={
-                "clear_button " +
-                (userSelectedCols.length > 0 ? "clear_button_active" : "")
-              } */}
             <button
               className={
                 userSelectedCols.length > 0
