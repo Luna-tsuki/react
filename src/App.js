@@ -16,7 +16,9 @@ import Navigation from "./routes/navigation/navigation.component.jsx";
 import Home from "./routes/home/home.component.jsx";
 
 import Category from "./myroutes/category/category.component.jsx";
-import Bed from "./myroutes/bed/bed.component.jsx";
+import EcHome from "./myroutes/echome/echome.component.jsx";
+import ItemList from "./myroutes/itemlist/itemlist.component.jsx";
+import SubItemList from "./myroutes/subitemlist/subitemlist.component.jsx";
 //-----------------------------------------------------------------------------------
 
 const Shop = () => {
@@ -27,15 +29,19 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Category />}>
-        {/* <Route index element={<Home />} /> */}
-        <Route path="bed" element={<Bed />} />
+        <Route index element={<EcHome />} />
+        <Route path="itemlist/:categoryIdString" element={<ItemList />} />
+        <Route
+          path="itemlist/:categoryIdString/:subCategoryIdString"
+          element={<SubItemList />}
+        />
       </Route>
-
-      <Route path="/categorypro" element={<CategoryPro />} />
+      {/* 
+      <Route path="/category" element={<Category />} />
       <Route path="/userhistory" element={<UserHistory />} />
       <Route path="/recommend" element={<Recommend />} />
       <Route path="/todolistref" element={<TodoListRef />} />
-      <Route path="/todolist" element={<TodoList />} />
+      <Route path="/todolist" element={<TodoList />} /> */}
     </Routes>
 
     // <Routes>
