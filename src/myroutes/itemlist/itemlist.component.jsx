@@ -1,8 +1,29 @@
 import { Outlet, Link, useParams, useLocation } from "react-router-dom";
-import { useState, useEffect, Fragment } from "react";
+import {
+  useState,
+  useEffect,
+  Fragment,
+  createContext,
+  useContext,
+} from "react";
 import "./itemlist.styles.css";
 import axios from "axios";
 
+//导入组件
+import SubCategory from "../component/subcategory/subcategory.componment";
+import Property from "../component/property/property.componment";
+import Controlbar from "../component/controlbar/controlbar.componment";
+import ProductList from "../component/productlistItems/productlist.componment";
+import Pagination from "../component/pagination/pagination.componment";
+
+//导出context
+export const subCategoryContext = createContext();
+export const propertyContext = createContext();
+export const controlbarContext = createContext();
+export const productlistContext = createContext();
+export const paginationContext = createContext();
+
+//固定网址部分
 const localhost = axios.create({
   baseURL: "http://localhost:8080",
 });
@@ -187,7 +208,6 @@ const ItemList = () => {
       if (filterCols[colName]) {
         //如果有对应的colName，加进对应的col数组
         filterCols[colName].push(col);
-        console.log(filterCols[colName], "filterCols[colName]");
         setFilterCols({ ...filterCols });
       } else {
         //如果没有对应的colName，新加一个colName键值对
@@ -228,7 +248,18 @@ const ItemList = () => {
       </div>
       <div className="page_subcategory">
         <div className="sidebar">
-          <div className="subcategory">
+          <subCategoryContext.Provider
+            value={{
+              categoryCountList,
+              goodsCategoryId,
+              parentCategoryName,
+              childrenCategoryName,
+            }}
+          >
+            <SubCategory />
+          </subCategoryContext.Provider>
+
+          {/* <div className="subcategory">
             <span>カテゴリを選択</span>
           </div>
 
@@ -257,9 +288,20 @@ const ItemList = () => {
                 );
               })}
             </ul>
-          </div>
+          </div> */}
 
-          <div className="subcategory">
+          <propertyContext.Provider
+            value={{
+              propertyCountList,
+              userSelectedCols,
+              handleProperty,
+              handleColClear,
+            }}
+          >
+            <Property level="2" />
+          </propertyContext.Provider>
+
+          {/* <div className="property">
             <span>条件で絞り込む</span>
           </div>
 
@@ -313,7 +355,7 @@ const ItemList = () => {
                 </div>
               </div>
             );
-          })}
+          })}*/}
         </div>
 
         <div className="layout_body">
@@ -326,7 +368,17 @@ const ItemList = () => {
               <button>敷きパッド・ベッドパッドの選び方</button>
             </p>
           </div>
-          <div className="controlbar">
+
+          <controlbarContext.Provider
+            value={{
+              itemTotal,
+              pageNo,
+              handleOrderBy,
+            }}
+          >
+            <Controlbar level="2" />
+          </controlbarContext.Provider>
+          {/* <div className="controlbar">
             <p>
               全<span className="total">{itemTotal}</span>件　
               <span>
@@ -342,20 +394,13 @@ const ItemList = () => {
                   <option value="3">価格の高い順</option>
                 </select>
               </div>
-              {/* <div className="controlbar_view">
-                <span>表示切替</span>
-                <label className="checklabel">
-                  <input type="checkbox" className="checkbox" />
-                  <span className="checkmark"></span>
-                </label>
-                <label className="checklabel">
-                  <input type="checkbox" className="checkbox" />
-                  <span className="checkmark"></span>
-                </label>
-              </div> */}
             </div>
-          </div>
-          <div className="productlistItems">
+          </div> */}
+
+          <productlistContext.Provider value={{ ItemGoodsInfoList }}>
+            <ProductList level="2" />
+          </productlistContext.Provider>
+          {/* <div className="productlist">
             {ItemGoodsInfoList.map((ItemGoods) => {
               return (
                 <div className="item-container" key={ItemGoods.goodsId}>
@@ -373,8 +418,20 @@ const ItemList = () => {
                 </div>
               );
             })}
-          </div>
-          <div className="pagination">
+          </div> */}
+
+          <paginationContext.Provider
+            value={{
+              handlePageNoForward,
+              handlePageNo,
+              handlePageNoNext,
+              pageNo,
+              pageCount,
+            }}
+          >
+            <Pagination level="2" />
+          </paginationContext.Provider>
+          {/* <div className="pagination">
             <span
               className="linkpage"
               onClick={() => handlePageNoForward()}
@@ -410,7 +467,7 @@ const ItemList = () => {
             >
               次へ
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </Fragment>

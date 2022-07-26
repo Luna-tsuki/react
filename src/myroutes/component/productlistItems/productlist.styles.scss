@@ -1,0 +1,39 @@
+.productlist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  .item-container {
+    margin-top: 20px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    img {
+      width: 180px;
+      height: 180px;
+      background-color: #dcdcdc;
+    }
+    .goodsName {
+      display: inline-block;
+      width: 180px;
+      height: 40px;
+      margin-top: 6px;
+      font-size: 14px;
+      text-align: left;
+    }
+    .price {
+      margin-top: 6px;
+      text-align: left;
+      .sellingPrice {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: left;
+        margin-right: 5px;
+      }
+      .sellingName {
+        font-size: 14px;
+        text-align: left;
+      }
+    }
+  }
+}

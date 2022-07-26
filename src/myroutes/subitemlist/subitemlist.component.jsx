@@ -1,8 +1,27 @@
 import { Outlet, Link, useParams, useLocation } from "react-router-dom";
-import { useState, useEffect, Fragment } from "react";
+import {
+  useState,
+  useEffect,
+  Fragment,
+  createContext,
+  useContext,
+} from "react";
 import "./subitemlist.styles.css";
 import axios from "axios";
 
+//导入组件
+import Property from "../component/property/property.componment";
+import Controlbar from "../component/controlbar/controlbar.componment";
+import ProductList from "../component/productlistItems/productlist.componment";
+import Pagination from "../component/pagination/pagination.componment";
+
+//导出context
+export const subpropertyContext = createContext();
+export const subcontrolbarContext = createContext();
+export const subproductlistContext = createContext();
+export const subpaginationContext = createContext();
+
+//固定网址部分
 const localhost = axios.create({
   baseURL: "http://localhost:8080",
 });
@@ -267,7 +286,18 @@ const SubItemList = () => {
             </ul>
           </div> */}
 
-          <div className="subcategory">
+          <subpropertyContext.Provider
+            value={{
+              propertyCountList,
+              userSelectedCols,
+              handleProperty,
+              handleColClear,
+            }}
+          >
+            <Property level="3" />
+          </subpropertyContext.Provider>
+
+          {/* <div className="property">
             <span>条件で絞り込む</span>
           </div>
 
@@ -321,7 +351,7 @@ const SubItemList = () => {
                 </div>
               </div>
             );
-          })}
+          })} */}
         </div>
 
         <div className="layout_body">
@@ -334,7 +364,17 @@ const SubItemList = () => {
               <button>敷きパッド・ベッドパッドの選び方</button>
             </p>
           </div>
-          <div className="controlbar">
+
+          <subcontrolbarContext.Provider
+            value={{
+              itemTotal,
+              pageNo,
+              handleOrderBy,
+            }}
+          >
+            <Controlbar level="3" />
+          </subcontrolbarContext.Provider>
+          {/* <div className="controlbar">
             <p>
               全<span className="total">{itemTotal}</span>件　
               <span>
@@ -350,20 +390,13 @@ const SubItemList = () => {
                   <option value="3">価格の高い順</option>
                 </select>
               </div>
-              {/* <div className="controlbar_view">
-                <span>表示切替</span>
-                <label className="checklabel">
-                  <input type="checkbox" className="checkbox" />
-                  <span className="checkmark"></span>
-                </label>
-                <label className="checklabel">
-                  <input type="checkbox" className="checkbox" />
-                  <span className="checkmark"></span>
-                </label>
-              </div> */}
             </div>
-          </div>
-          <div className="productlistItems">
+          </div> */}
+
+          <subproductlistContext.Provider value={{ ItemGoodsInfoList }}>
+            <ProductList level="3" />
+          </subproductlistContext.Provider>
+          {/* <div className="productlist">
             {ItemGoodsInfoList.map((ItemGoods) => {
               return (
                 <div className="item-container" key={ItemGoods.goodsId}>
@@ -381,8 +414,20 @@ const SubItemList = () => {
                 </div>
               );
             })}
-          </div>
-          <div className="pagination">
+          </div> */}
+
+          <subpaginationContext.Provider
+            value={{
+              handlePageNoForward,
+              handlePageNo,
+              handlePageNoNext,
+              pageNo,
+              pageCount,
+            }}
+          >
+            <Pagination level="3" />
+          </subpaginationContext.Provider>
+          {/* <div className="pagination">
             <span
               className="linkpage"
               onClick={() => handlePageNoForward()}
@@ -418,7 +463,7 @@ const SubItemList = () => {
             >
               次へ
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </Fragment>

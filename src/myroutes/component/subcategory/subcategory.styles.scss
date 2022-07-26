@@ -1,0 +1,21 @@
+.subcategory_condition {
+  padding: 15px 30px;
+  background-color: #f7f7f7;
+  margin-bottom: 8px;
+  > span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .subcategory_button {
+    margin: 10px 0 1px;
+    width: 300px;
+    height: 36px;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    &:hover {
+      border: 1px solid #009e96;
+      cursor: pointer;
+    }
+  }
+}
