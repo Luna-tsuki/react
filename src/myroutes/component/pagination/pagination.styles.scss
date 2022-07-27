@@ -1,0 +1,37 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  .p_index {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    li {
+      margin: 0 2.5px;
+      width: 34px;
+      height: 34px;
+      text-align: center;
+      color: #009e96;
+      border: 1px solid #dbdbdb;
+      border-radius: 4px;
+      background-color: #fff;
+      &:hover {
+        border-color: #009e96;
+        cursor: pointer;
+      }
+    }
+    .active {
+      border-color: #009e96;
+      background-color: #e9f5f4;
+      display: inline-block;
+    }
+  }
+  .linkpage {
+    margin: 0 20px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

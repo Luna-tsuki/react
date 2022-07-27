@@ -1,0 +1,39 @@
+.productlist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.productlist .item-container {
+  margin-top: 20px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.productlist .item-container img {
+  width: 180px;
+  height: 180px;
+  background-color: #dcdcdc;
+}
+.productlist .item-container .goodsName {
+  display: inline-block;
+  width: 180px;
+  height: 40px;
+  margin-top: 6px;
+  font-size: 14px;
+  text-align: left;
+}
+.productlist .item-container .price {
+  margin-top: 6px;
+  text-align: left;
+}
+.productlist .item-container .price .sellingPrice {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+  margin-right: 5px;
+}
+.productlist .item-container .price .sellingName {
+  font-size: 14px;
+  text-align: left;
+}/*# sourceMappingURL=productlist.styles.css.map */

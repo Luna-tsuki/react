@@ -56,6 +56,15 @@
   border: 1px solid #009e96;
   cursor: pointer;
 }
+.page_subcategory .sidebar .property {
+  padding: 15px 30px;
+  background-color: #f7f7f7;
+  margin-bottom: 2px;
+}
+.page_subcategory .sidebar .property span {
+  font-size: 24px;
+  font-weight: bold;
+}
 .page_subcategory .sidebar .property_condition {
   padding: 15px 30px;
   background-color: #f7f7f7;
@@ -194,24 +203,24 @@
 .page_subcategory .layout_body .controlbar .r-controlbar .selectedOrder .controlbar_view .checklabel {
   margin-left: 5px;
 }
-.page_subcategory .layout_body .productlistItems {
+.page_subcategory .layout_body .productlist {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.page_subcategory .layout_body .productlistItems .item-container {
+.page_subcategory .layout_body .productlist .item-container {
   margin-top: 20px;
   width: 200px;
   display: flex;
   flex-direction: column;
 }
-.page_subcategory .layout_body .productlistItems .item-container img {
+.page_subcategory .layout_body .productlist .item-container img {
   width: 180px;
   height: 180px;
   background-color: #dcdcdc;
 }
-.page_subcategory .layout_body .productlistItems .item-container .goodsName {
+.page_subcategory .layout_body .productlist .item-container .goodsName {
   display: inline-block;
   width: 180px;
   height: 40px;
@@ -219,17 +228,17 @@
   font-size: 14px;
   text-align: left;
 }
-.page_subcategory .layout_body .productlistItems .item-container .price {
+.page_subcategory .layout_body .productlist .item-container .price {
   margin-top: 6px;
   text-align: left;
 }
-.page_subcategory .layout_body .productlistItems .item-container .price .sellingPrice {
+.page_subcategory .layout_body .productlist .item-container .price .sellingPrice {
   font-size: 22px;
   font-weight: bold;
   text-align: left;
   margin-right: 5px;
 }
-.page_subcategory .layout_body .productlistItems .item-container .price .sellingName {
+.page_subcategory .layout_body .productlist .item-container .price .sellingName {
   font-size: 14px;
   text-align: left;
 }

@@ -1,0 +1,43 @@
+.controlbar {
+  flex: 0 1 auto;
+  height: 48px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  border-top: 2px solid #009e96;
+  background-color: #f7f7f7;
+}
+.controlbar > p {
+  font-size: 14px;
+}
+.controlbar > p .total {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 3px;
+}
+.controlbar .r-controlbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.controlbar .r-controlbar .selectedOrder {
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  background-color: #fff;
+  margin-right: 10px;
+}
+.controlbar .r-controlbar .selectedOrder select {
+  height: 34px;
+  padding: 0 39px 0 14px;
+  border-width: 0;
+  border-radius: 4px;
+}
+.controlbar .r-controlbar .selectedOrder .controlbar_view {
+  margin-left: 30px;
+}
+.controlbar .r-controlbar .selectedOrder .controlbar_view .checklabel {
+  margin-left: 5px;
+}/*# sourceMappingURL=controlbar.styles.css.map */

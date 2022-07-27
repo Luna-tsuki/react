@@ -1,0 +1,77 @@
+.property {
+  padding: 15px 30px;
+  background-color: #f7f7f7;
+  margin-bottom: 2px;
+}
+.property span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.property_condition {
+  padding: 15px 30px;
+  background-color: #f7f7f7;
+  margin-bottom: 2px;
+}
+.property_condition .property_title {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+}
+.property_condition .property_clear {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.property_condition .property_clear .property_button {
+  margin: 10px 5px 5px 0;
+  padding: 5px 11px 5px 13px;
+  border: 1px solid #dbdbdb;
+  border-radius: 100px;
+  background-color: #fff;
+  color: #333333;
+  cursor: pointer;
+}
+
+.clear_button {
+  margin: 10px 0 1px;
+  width: 300px;
+  height: 50px;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.clear_button_active {
+  margin: 10px 0 1px;
+  width: 300px;
+  height: 50px;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333333;
+}
+.clear_button_active:hover {
+  border: 1px solid #009e96;
+  cursor: pointer;
+}
+
+.property_list {
+  display: flex;
+  flex-direction: column;
+}
+
+.checklabel {
+  margin-top: 5px;
+  cursor: pointer;
+}
+.checklabel input[type=checkbox] {
+  background-color: #4caf50;
+}
+.checklabel .checkmark {
+  margin-left: 6px;
+  font-size: 16px;
+}/*# sourceMappingURL=property.styles.css.map */

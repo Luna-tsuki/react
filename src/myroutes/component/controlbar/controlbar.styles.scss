@@ -1,0 +1,52 @@
+.controlbar {
+  flex: 0 1 auto;
+  height: 48px;
+  max-width: 800px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 5px 20px;
+  border-top: 2px solid #009e96;
+  background-color: #f7f7f7;
+  > p {
+    font-size: 14px;
+
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 3px;
+    }
+  }
+  .r-controlbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .selectedOrder {
+      border: 1px solid #dbdbdb;
+      border-radius: 4px;
+      background-color: #fff;
+      margin-right: 10px;
+
+      select {
+        height: 34px;
+        padding: 0 39px 0 14px;
+        border-width: 0;
+        border-radius: 4px;
+        // -webkit-appearance: none;
+        // -moz-appearance: none;
+        // text-indent: 1px;
+        // text-overflow: "";
+      }
+
+      .controlbar_view {
+        margin-left: 30px;
+        .checklabel {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}
