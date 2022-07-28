@@ -25,6 +25,43 @@ const ProductList = ({ level }) => {
                 <span className="sellingPrice">{ItemGoods.sellingPrice}</span>
                 <span className="sellingName">円（税込）</span>
               </p>
+              <div className="item-colors">
+                <ul>
+                  {ItemGoods.propertyColColorList.map((colorList) => {
+                    return (
+                      <li className="item-color" key={colorList.id}>
+                        <img
+                          className="item-colorimg"
+                          alt={colorList.col}
+                          src={colorList.colImg}
+                        />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div className="item-propertys">
+                <ul>
+                  {/* <li className="item-property">
+                    <img
+                      className="item-propertyimg"
+                      alt=""
+                      src="https://www.nitori-net.jp/ecstatic/image/sys-master/images/8878560215070/pic01062.jpg"
+                    />
+                  </li> */}
+                  {ItemGoods.propertyColAllList.map((colAllList) => {
+                    return (
+                      <li className="item-property" key={colAllList.id}>
+                        <img
+                          className="item-propertyimg"
+                          alt={colAllList.col}
+                          src={colAllList.colImg}
+                        />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
           );
         })}

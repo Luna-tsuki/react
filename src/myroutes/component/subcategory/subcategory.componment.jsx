@@ -5,32 +5,39 @@ import { Link } from "react-router-dom";
 import "./subcategory.styles.css";
 
 const SubCategory = () => {
-  const {
-    categoryCountList,
-    goodsCategoryId,
-    parentCategoryName,
-    childrenCategoryName,
-  } = useContext(subCategoryContext);
+  const { BreadcrumbsList, categoryCountList } = useContext(subCategoryContext);
 
   return (
     <Fragment>
-      <div className="subcategory">
+      <div
+        className="subcategory"
+        style={{
+          display: BreadcrumbsList.length < 3 ? "block" : "none",
+        }}
+      >
         <span>カテゴリを選択</span>
       </div>
 
-      <div className="subcategory_condition">
+      <div
+        className="subcategory_condition"
+        style={{
+          display: BreadcrumbsList.length < 3 ? "block" : "none",
+        }}
+      >
         <span>カテゴリ</span>
         <ul>
           {categoryCountList.map((subcategory) => {
             return (
               <Link
                 key={subcategory.goodsCategoryId}
-                to={`/itemlist/${goodsCategoryId}/${subcategory.goodsCategoryId}`}
-                state={{
-                  parentCategoryName: parentCategoryName,
-                  childrenCategoryName: childrenCategoryName,
-                  subChildrenCategoryName: subcategory.categoryName,
-                }}
+                to={`/itemlist/${subcategory.goodsCategoryId}`}
+                state={[
+                  ...BreadcrumbsList,
+                  {
+                    categoryId: subcategory.goodsCategoryId,
+                    categoryName: subcategory.categoryName,
+                  },
+                ]}
               >
                 <li>
                   <button className="subcategory_button">

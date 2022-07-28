@@ -36,4 +36,44 @@
 .productlist .item-container .price .sellingName {
   font-size: 14px;
   text-align: left;
+}
+.productlist .item-container .item-colors {
+  width: 185px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.productlist .item-container .item-colors ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.productlist .item-container .item-colors ul .item-color {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.productlist .item-container .item-colors ul .item-color .item-colorimg {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%;
+  border: 1px solid #dbdbdb;
+}
+.productlist .item-container .item-propertys {
+  width: 185px;
+}
+.productlist .item-container .item-propertys ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.productlist .item-container .item-propertys ul .item-property {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+.productlist .item-container .item-propertys ul .item-property .item-propertyimg {
+  max-width: 100%;
+  max-height: 100%;
 }/*# sourceMappingURL=productlist.styles.css.map */

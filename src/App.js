@@ -31,10 +31,11 @@ const App = () => {
       <Route path="/" element={<Category />}>
         <Route index element={<EcHome />} />
         <Route path="itemlist/:categoryIdString" element={<ItemList />} />
-        <Route
+        {/* <Route path="itemlist/:subCategoryIdString" element={<ItemList />} /> */}
+        {/* <Route
           path="itemlist/:categoryIdString/:subCategoryIdString"
           element={<SubItemList />}
-        />
+        /> */}
       </Route>
       {/* 
       <Route path="/category" element={<Category />} />
