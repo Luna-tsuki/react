@@ -6,27 +6,29 @@ import {
   createContext,
   useContext,
 } from "react";
-import "./subitemlist.styles.css";
+import "./itemlist.styles.css";
 import axios from "axios";
 
 //导入组件
+import SubCategory from "../component/subcategory/subcategory.componment";
 import Property from "../component/property/property.componment";
 import Controlbar from "../component/controlbar/controlbar.componment";
 import ProductList from "../component/productlistItems/productlist.componment";
 import Pagination from "../component/pagination/pagination.componment";
 
 //导出context
-export const subpropertyContext = createContext();
-export const subcontrolbarContext = createContext();
-export const subproductlistContext = createContext();
-export const subpaginationContext = createContext();
+export const subCategoryContext = createContext();
+export const propertyContext = createContext();
+export const controlbarContext = createContext();
+export const productlistContext = createContext();
+export const paginationContext = createContext();
 
 //固定网址部分
 const localhost = axios.create({
   baseURL: "http://localhost:8080",
 });
 
-const SubItemList = () => {
+const ItemList = () => {
   //初始值
   const initialState = {
     ItemGoodsInfoList: [
@@ -189,17 +191,13 @@ const SubItemList = () => {
     ],
   };
 
-  //接收从二级页面itemlist的link传进来的categoryId
-  const { categoryIdString, subCategoryIdString } = useParams();
+  //接收从首页category的link传进来的categoryId
+  const { categoryIdString } = useParams();
   const categoryId = parseInt(categoryIdString);
-  const subCategoryId = parseInt(subCategoryIdString);
-  let goodsCategoryId = categoryId;
-  let goodsSubCategoryId = subCategoryId;
-
-  //接收从二级页面itemlist的link传进来的categoryName
+  const goodsCategoryId = categoryId;
+  //接收从首页category的link传进来的categoryName
   const { state } = useLocation();
-  const { parentCategoryName, childrenCategoryName, subChildrenCategoryName } =
-    state;
+  const { parentCategoryName, childrenCategoryName } = state;
 
   //初始化 post 信息
   const [ItemLists, setItemLists] = useState(initialState);
@@ -219,7 +217,7 @@ const SubItemList = () => {
       const response = await localhost.post("/ItemList/new", {
         limit: 10,
         cols: [],
-        goodsCategoryId: goodsSubCategoryId,
+        goodsCategoryId: goodsCategoryId,
         orderBy: orderBy,
         ascOrDesc: ascOrDesc,
         pageNo: pageNo,
@@ -239,6 +237,8 @@ const SubItemList = () => {
     };
     const key = parseInt(event.target.value);
     setOrderBy(ORDER_BY_VALUE[key]);
+
+    //设置正序or倒序
     if (key === 2) {
       setAscOrDesc("asc");
     } else if (key === 3) {
@@ -283,7 +283,6 @@ const SubItemList = () => {
       if (filterCols[colName]) {
         //如果有对应的colName，加进对应的col数组
         filterCols[colName].push(col);
-        console.log(filterCols[colName], "filterCols[colName]");
         setFilterCols({ ...filterCols });
       } else {
         //如果没有对应的colName，新加一个colName键值对
@@ -293,7 +292,7 @@ const SubItemList = () => {
     }
     setPgaeNo(1);
   };
-  //function 点击clear按钮删除 col
+  //function 点击clear按钮删除属性 col
   const handleColClear = (col) => {
     //删除 userSelectedCols 的col
     setUserSelectedCols(userSelectedCols.filter((item) => item !== col));
@@ -308,6 +307,12 @@ const SubItemList = () => {
     }
     setFilterCols({ ...filterCols });
   };
+  const handleColClearAll = () => {
+    //删除 userSelectedCols 的所有col
+    setUserSelectedCols([]);
+    //删除 filterCols 的所有col
+    setFilterCols({});
+  };
 
   return (
     <Fragment>
@@ -320,57 +325,63 @@ const SubItemList = () => {
         <span className="leadname"> > </span>
         <span className="leadname">{parentCategoryName}</span>
         <span className="leadname"> > </span>
-        <Link
-          to={`/itemlist/${categoryId}`}
-          state={{
-            parentCategoryName: parentCategoryName,
-            childrenCategoryName: childrenCategoryName,
-          }}
-        >
-          <span className="leadname">{childrenCategoryName}</span>
-        </Link>
-        <span className="leadname"> > </span>
-        <span className="leadname">{subChildrenCategoryName}</span>
+        <span className="leadname">{childrenCategoryName}</span>
       </div>
       <div className="page_subcategory">
         <div className="sidebar">
+          <subCategoryContext.Provider
+            value={{
+              categoryCountList,
+              goodsCategoryId,
+              parentCategoryName,
+              childrenCategoryName,
+            }}
+          >
+            <SubCategory />
+          </subCategoryContext.Provider>
+
           {/* <div className="subcategory">
             <span>カテゴリを選択</span>
-          </div> 
+          </div>
+
           <div className="subcategory_condition">
             <span>カテゴリ</span>
             <ul>
               {categoryCountList.map((subcategory) => {
                 return (
-                  <li key={subcategory.goodsCategoryId}>
-                    <button
-                      className="subcategory_button"
-                      // onClick={() =>
-                      //   handleUpdaySubCategory(subcategory.goodsCategoryId)
-                      // }
-                    >
-                      <Link to={`/itemlist/${subcategory.categoryId}`}>
+                  <Link
+                    key={subcategory.goodsCategoryId}
+                    to={`/itemlist/${goodsCategoryId}/${subcategory.goodsCategoryId}`}
+                    state={{
+                      parentCategoryName: parentCategoryName,
+                      childrenCategoryName: childrenCategoryName,
+                      subChildrenCategoryName: subcategory.categoryName,
+                    }}
+                  >
+                    <li>
+                      <button className="subcategory_button">
                         {subcategory.categoryName}
                         {subcategory.goodsCategoryId}(
                         {subcategory.categoryCount})
-                      </Link>
-                    </button>
-                  </li>
+                      </button>
+                    </li>
+                  </Link>
                 );
               })}
             </ul>
           </div> */}
 
-          <subpropertyContext.Provider
+          <propertyContext.Provider
             value={{
               propertyCountList,
               userSelectedCols,
               handleProperty,
               handleColClear,
+              handleColClearAll,
             }}
           >
-            <Property level="3" />
-          </subpropertyContext.Provider>
+            <Property level="2" />
+          </propertyContext.Provider>
 
           {/* <div className="property">
             <span>条件で絞り込む</span>
@@ -426,29 +437,29 @@ const SubItemList = () => {
                 </div>
               </div>
             );
-          })} */}
+          })}*/}
         </div>
 
         <div className="layout_body">
           <div className="layout_head">
-            <span>敷きパッド・ベッドパッド</span>
+            <span>{childrenCategoryName}</span>
             <p>
               ニトリの敷きパッド・ベッドパッドです。シーツの上に敷く敷きパッドは、肌に直接触れるので、季節に合った機能・素材がお勧めです。シーツの下に敷くベッドパッドは、汗取りタイプと寝心地調整タイプ（マットレストッパー）がございます。
             </p>
             <p>
-              <button>敷きパッド・ベッドパッドの選び方</button>
+              <button>{childrenCategoryName}の選び方</button>
             </p>
           </div>
 
-          <subcontrolbarContext.Provider
+          <controlbarContext.Provider
             value={{
               itemTotal,
               pageNo,
               handleOrderBy,
             }}
           >
-            <Controlbar level="3" />
-          </subcontrolbarContext.Provider>
+            <Controlbar level="2" />
+          </controlbarContext.Provider>
           {/* <div className="controlbar">
             <p>
               全<span className="total">{itemTotal}</span>件　
@@ -468,9 +479,9 @@ const SubItemList = () => {
             </div>
           </div> */}
 
-          <subproductlistContext.Provider value={{ ItemGoodsInfoList }}>
-            <ProductList level="3" />
-          </subproductlistContext.Provider>
+          <productlistContext.Provider value={{ ItemGoodsInfoList }}>
+            <ProductList level="2" />
+          </productlistContext.Provider>
           {/* <div className="productlist">
             {ItemGoodsInfoList.map((ItemGoods) => {
               return (
@@ -491,7 +502,7 @@ const SubItemList = () => {
             })}
           </div> */}
 
-          <subpaginationContext.Provider
+          <paginationContext.Provider
             value={{
               handlePageNoForward,
               handlePageNo,
@@ -500,8 +511,8 @@ const SubItemList = () => {
               pageCount,
             }}
           >
-            <Pagination level="3" />
-          </subpaginationContext.Provider>
+            <Pagination level="2" />
+          </paginationContext.Provider>
           {/* <div className="pagination">
             <span
               className="linkpage"
@@ -544,4 +555,4 @@ const SubItemList = () => {
     </Fragment>
   );
 };
-export default SubItemList;
+export default ItemList;

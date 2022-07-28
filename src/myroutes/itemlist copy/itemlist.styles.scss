@@ -1,0 +1,297 @@
+// .lead {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   margin: 0 auto 20px;
+//   padding: 4px 0;
+//   width: 1200px;
+//   height: 40px;
+//   font-size: 14px;
+//   a {
+//     color: #009e96;
+//   }
+//   .leadname {
+//     margin-left: 10px;
+//   }
+// }
+.page_subcategory {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: 1200px;
+  height: 1000px;
+  color: #333333;
+  // position: relative;
+  .sidebar {
+    flex: 0 0 auto;
+    width: 360px;
+    margin-right: 40px;
+    // .subcategory {
+    //   padding: 15px 30px;
+    //   background-color: #f7f7f7;
+    //   margin-bottom: 2px;
+    //   span {
+    //     font-size: 24px;
+    //     font-weight: bold;
+    //   }
+    // }
+    // .subcategory_condition {
+    //   padding: 15px 30px;
+    //   background-color: #f7f7f7;
+    //   margin-bottom: 8px;
+    //   > span {
+    //     font-size: 18px;
+    //     font-weight: bold;
+    //   }
+    //   .subcategory_button {
+    //     margin: 10px 0 1px;
+    //     width: 300px;
+    //     height: 36px;
+    //     background-color: #fff;
+    //     border: 1px solid #dbdbdb;
+    //     border-radius: 4px;
+    //     &:hover {
+    //       border: 1px solid #009e96;
+    //       cursor: pointer;
+    //     }
+    //   }
+    // }
+    // .property {
+    //   padding: 15px 30px;
+    //   background-color: #f7f7f7;
+    //   margin-bottom: 2px;
+    //   span {
+    //     font-size: 24px;
+    //     font-weight: bold;
+    //   }
+    // }
+    // .property_condition {
+    //   padding: 15px 30px;
+    //   background-color: #f7f7f7;
+    //   margin-bottom: 2px;
+
+    //   .property_title {
+    //     display: block;
+    //     font-size: 18px;
+    //     font-weight: bold;
+    //   }
+    //   .property_clear {
+    //     display: flex;
+    //     flex-direction: row;
+    //     flex-wrap: wrap;
+    //     .property_button {
+    //       margin: 10px 5px 5px 0;
+    //       padding: 5px 11px 5px 13px;
+    //       border: 1px solid #dbdbdb;
+    //       border-radius: 100px;
+    //       background-color: #fff;
+    //       color: #333333;
+    //       cursor: pointer;
+    //     }
+    //   }
+
+    //   .clear_button {
+    //     margin: 10px 0 1px;
+    //     width: 300px;
+    //     height: 50px;
+    //     background-color: #ccc;
+    //     border: 1px solid #ccc;
+    //     border-radius: 4px;
+    //     color: #fff;
+    //     font-size: 16px;
+    //   }
+    //   .clear_button_active {
+    //     margin: 10px 0 1px;
+    //     width: 300px;
+    //     height: 50px;
+    //     background-color: #fff;
+    //     border: 1px solid #dbdbdb;
+    //     border-radius: 4px;
+    //     font-size: 16px;
+    //     color: #333333;
+    //     &:hover {
+    //       border: 1px solid #009e96;
+    //       cursor: pointer;
+    //     }
+    //   }
+    //   .property_list {
+    //     display: flex;
+    //     flex-direction: column;
+    //   }
+    //   .checklabel {
+    //     margin-top: 5px;
+    //     cursor: pointer;
+    //     input[type="checkbox"] {
+    //       background-color: #4caf50;
+    //     }
+    //     .checkmark {
+    //       margin-left: 6px;
+    //       font-size: 16px;
+    //     }
+    //   }
+    // }
+  }
+  .layout_body {
+    flex: 0 1 auto;
+    max-width: 800px;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    .layout_head {
+      max-width: 800px;
+
+      span {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      p {
+        font-size: 14px;
+        margin-top: 14px;
+      }
+      button {
+        margin: 10px 0 20px;
+        width: 280px;
+        height: 36px;
+        text-align: left;
+        padding-left: 20px;
+        background-color: #fff;
+        border: 1px solid #dbdbdb;
+        border-radius: 4px;
+        &:hover {
+          border: 1px solid #009e96;
+          cursor: pointer;
+        }
+      }
+    }
+
+    // .controlbar {
+    //   flex: 0 1 auto;
+    //   height: 48px;
+    //   max-width: 800px;
+
+    //   display: flex;
+    //   flex-direction: row;
+    //   align-items: center;
+    //   justify-content: space-between;
+
+    //   padding: 5px 20px;
+    //   border-top: 2px solid #009e96;
+    //   background-color: #f7f7f7;
+    //   > p {
+    //     font-size: 14px;
+
+    //     .total {
+    //       font-size: 18px;
+    //       font-weight: bold;
+    //       margin: 0 3px;
+    //     }
+    //   }
+    //   .r-controlbar {
+    //     display: flex;
+    //     flex-direction: row;
+    //     align-items: center;
+    //     .selectedOrder {
+    //       border: 1px solid #dbdbdb;
+    //       border-radius: 4px;
+    //       background-color: #fff;
+    //       margin-right: 10px;
+
+    //       select {
+    //         height: 34px;
+    //         padding: 0 39px 0 14px;
+    //         border-width: 0;
+    //         border-radius: 4px;
+    //         // -webkit-appearance: none;
+    //         // -moz-appearance: none;
+    //         // text-indent: 1px;
+    //         // text-overflow: "";
+    //       }
+
+    //       .controlbar_view {
+    //         margin-left: 30px;
+    //         .checklabel {
+    //           margin-left: 5px;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // .productlist{
+    //   display: flex;
+    //   flex-direction: row;
+    //   flex-wrap: wrap;
+    //   justify-content: flex-start;
+    //   .item-container {
+    //     margin-top: 20px;
+    //     width: 200px;
+    //     display: flex;
+    //     flex-direction: column;
+    //     img {
+    //       width: 180px;
+    //       height: 180px;
+    //       background-color: #dcdcdc;
+    //     }
+    //     .goodsName {
+    //       display: inline-block;
+    //       width: 180px;
+    //       height: 40px;
+    //       margin-top: 6px;
+    //       font-size: 14px;
+    //       text-align: left;
+    //     }
+    //     .price {
+    //       margin-top: 6px;
+    //       text-align: left;
+    //       .sellingPrice {
+    //         font-size: 22px;
+    //         font-weight: bold;
+    //         text-align: left;
+    //         margin-right: 5px;
+    //       }
+    //       .sellingName {
+    //         font-size: 14px;
+    //         text-align: left;
+    //       }
+    //     }
+    //   }
+    // }
+    // .pagination {
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    //   padding-top: 50px;
+    //   padding-bottom: 50px;
+    //   .p_index {
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     li {
+    //       margin: 0 2.5px;
+    //       width: 34px;
+    //       height: 34px;
+    //       text-align: center;
+    //       color: #009e96;
+    //       border: 1px solid #dbdbdb;
+    //       border-radius: 4px;
+    //       background-color: #fff;
+    //       &:hover {
+    //         border-color: #009e96;
+    //         cursor: pointer;
+    //       }
+    //     }
+    //     .active {
+    //       border-color: #009e96;
+    //       background-color: #e9f5f4;
+    //       display: inline-block;
+    //     }
+    //   }
+    //   .linkpage {
+    //     margin: 0 20px;
+    //     &:hover {
+    //       cursor: pointer;
+    //     }
+    //   }
+    // }
+  }
+}

@@ -16,6 +16,7 @@ const Property = ({ level }) => {
     userSelectedCols,
     handleProperty,
     handleColClear,
+    handleColClearAll,
   } = useContext(levelMap[parseInt(level)]);
 
   // const {
@@ -49,6 +50,7 @@ const Property = ({ level }) => {
           className={
             userSelectedCols.length > 0 ? "clear_button_active" : "clear_button"
           }
+          onClick={() => handleColClearAll()}
         >
           全条件をクリア
         </button>

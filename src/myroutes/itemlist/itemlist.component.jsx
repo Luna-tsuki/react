@@ -10,6 +10,7 @@ import "./itemlist.styles.css";
 import axios from "axios";
 
 //导入组件
+import Lead from "../component/lead/lead.componment";
 import SubCategory from "../component/subcategory/subcategory.componment";
 import Property from "../component/property/property.componment";
 import Controlbar from "../component/controlbar/controlbar.componment";
@@ -17,6 +18,7 @@ import ProductList from "../component/productlistItems/productlist.componment";
 import Pagination from "../component/pagination/pagination.componment";
 
 //导出context
+export const leadContext = createContext();
 export const subCategoryContext = createContext();
 export const propertyContext = createContext();
 export const controlbarContext = createContext();
@@ -29,6 +31,14 @@ const localhost = axios.create({
 });
 
 const ItemList = () => {
+  //link
+  //接收link传进来的categoryId
+  const { categoryIdString } = useParams();
+  const goodsCategoryId = parseInt(categoryIdString);
+  //接收link state传进来的值
+  // const { parentCategoryName, childrenCategoryName, subChildrenCategoryName } =useLocation().state;
+  // const BreadcrumbsList = useLocation().state;
+
   //初始值
   const initialState = {
     ItemGoodsInfoList: [
@@ -40,6 +50,55 @@ const ItemList = () => {
           "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8993449607198/Bed.jpg",
         sellingPrice: 70,
         createTime: "2019-09-18T05:19:35.000+00:00",
+        propertyColColorList: [
+          {
+            id: 70,
+            goodsId: 12002,
+            colName: "カラー",
+            col: "ホワイト",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8966164348958/BasicColor_WH.jpg",
+          },
+          {
+            id: 71,
+            goodsId: 12002,
+            colName: "カラー",
+            col: "ピンク",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8966163496990/BasicColor_PI.jpg",
+          },
+        ],
+        propertyColAllList: [
+          {
+            id: 11,
+            goodsId: 12002,
+            colName: "機能・仕様",
+            col: "抗菌防臭",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8878560215070/pic01062.jpg",
+          },
+          {
+            id: 12,
+            goodsId: 12002,
+            colName: "タイプ",
+            col: "ポケットコイル",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8878712520734/pic03026.jpg",
+          },
+          {
+            id: 13,
+            goodsId: 12002,
+            colName: "商品の説明",
+            col: "静電気軽減",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8878565359646/pic01137.jpg",
+          },
+        ],
       },
       {
         goodsId: 12006,
@@ -49,24 +108,55 @@ const ItemList = () => {
           "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8993449607198/Bed.jpg",
         sellingPrice: 70,
         createTime: "2019-09-18T05:18:47.000+00:00",
-      },
-      {
-        goodsId: 12001,
-        goodsName: "无印良品 MUJI 基础润肤化妆水",
-        goodsCategoryId: 21,
-        goodsCoverImg:
-          "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8993449607198/Bed.jpg",
-        sellingPrice: 100,
-        createTime: "2019-09-18T05:18:47.000+00:00",
-      },
-      {
-        goodsId: 10195,
-        goodsName: "索尼 WH-1000XM3 头戴式耳机 头戴式耳机头戴式耳机头戴式耳机",
-        goodsCategoryId: 20,
-        goodsCoverImg:
-          "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8993449607198/Bed.jpg",
-        sellingPrice: 2599,
-        createTime: "2019-09-18T05:21:35.000+00:00",
+        propertyColColorList: [
+          {
+            id: 70,
+            goodsId: 12002,
+            colName: "カラー",
+            col: "ホワイト",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8966164348958/BasicColor_WH.jpg",
+          },
+          {
+            id: 71,
+            goodsId: 12002,
+            colName: "カラー",
+            col: "ピンク",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8966163496990/BasicColor_PI.jpg",
+          },
+        ],
+        propertyColAllList: [
+          {
+            id: 11,
+            goodsId: 12002,
+            colName: "機能・仕様",
+            col: "抗菌防臭",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8878560215070/pic01062.jpg",
+          },
+          {
+            id: 12,
+            goodsId: 12002,
+            colName: "タイプ",
+            col: "ポケットコイル",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8878712520734/pic03026.jpg",
+          },
+          {
+            id: 13,
+            goodsId: 12002,
+            colName: "商品の説明",
+            col: "静電気軽減",
+            colCount: null,
+            colImg:
+              "https://www.nitori-net.jp/ecstatic/image/sys-master/images/8878565359646/pic01137.jpg",
+          },
+        ],
       },
     ],
     categoryCountList: [
@@ -78,11 +168,6 @@ const ItemList = () => {
       {
         goodsCategoryId: 21,
         categoryName: "厨房电器",
-        categoryCount: 1,
-      },
-      {
-        goodsCategoryId: 23,
-        categoryName: "吸尘器",
         categoryCount: 1,
       },
     ],
@@ -114,20 +199,34 @@ const ItemList = () => {
         ],
       },
     ],
+    BreadcrumbsList: [
+      {
+        level: 1,
+        categoryName: "家电 数码 手机",
+        categoryId: 15,
+      },
+      {
+        level: 2,
+        categoryName: "家电",
+        categoryId: 17,
+      },
+      {
+        level: 3,
+        categoryName: "厨房电器",
+        categoryId: 21,
+      },
+    ],
   };
-
-  //接收从首页category的link传进来的categoryId
-  const { categoryIdString } = useParams();
-  const categoryId = parseInt(categoryIdString);
-  const goodsCategoryId = categoryId;
-  //接收从首页category的link传进来的categoryName
-  const { state } = useLocation();
-  const { parentCategoryName, childrenCategoryName } = state;
 
   //初始化 post 信息
   const [ItemLists, setItemLists] = useState(initialState);
-  const { ItemGoodsInfoList, categoryCountList, propertyCountList, itemTotal } =
-    ItemLists;
+  const {
+    ItemGoodsInfoList,
+    categoryCountList,
+    propertyCountList,
+    BreadcrumbsList,
+    itemTotal,
+  } = ItemLists;
   const [orderBy, setOrderBy] = useState("create_time");
   const [ascOrDesc, setAscOrDesc] = useState("asc");
   const [pageNo, setPgaeNo] = useState(1);
@@ -232,50 +331,88 @@ const ItemList = () => {
     }
     setFilterCols({ ...filterCols });
   };
+  const handleColClearAll = () => {
+    //删除 userSelectedCols 的所有col
+    setUserSelectedCols([]);
+    //删除 filterCols 的所有col
+    setFilterCols({});
+  };
 
   return (
     <Fragment>
       <Outlet />
 
-      <div className="lead">
+      <leadContext.Provider
+        value={{
+          BreadcrumbsList,
+        }}
+      >
+        <Lead />
+      </leadContext.Provider>
+      {/* <div className="lead">
         <Link className="" to="/">
           ホーム
         </Link>
-        <span className="leadname"> > </span>
-        <span className="leadname">{parentCategoryName}</span>
-        <span className="leadname"> > </span>
-        <span className="leadname">{childrenCategoryName}</span>
-      </div>
+        {BreadcrumbsList.map((breadcrumb) => {
+          let lastName = BreadcrumbsList[BreadcrumbsList.length - 1];
+          if (lastName === breadcrumb) {
+            return (
+              <div key={breadcrumb.categoryId}>
+                <span className="leadname"> > </span>
+                <span className="leadname">{breadcrumb.categoryName}</span>
+              </div>
+            );
+          }
+          return (
+            <div key={breadcrumb.categoryId}>
+              <span className="leadname"> > </span>
+              <Link className="" to={`/itemlist/${breadcrumb.categoryId}`}>
+                <span className="leadname">{breadcrumb.categoryName}</span>
+              </Link>
+            </div>
+          );
+        })}
+      </div> */}
+
       <div className="page_subcategory">
         <div className="sidebar">
           <subCategoryContext.Provider
             value={{
+              BreadcrumbsList,
               categoryCountList,
-              goodsCategoryId,
-              parentCategoryName,
-              childrenCategoryName,
             }}
           >
             <SubCategory />
           </subCategoryContext.Provider>
 
-          {/* <div className="subcategory">
+          {/* <div
+            className="subcategory"
+            style={{
+              display: BreadcrumbsList.length < 3 ? "block" : "none",
+            }}
+          >
             <span>カテゴリを選択</span>
           </div>
-
-          <div className="subcategory_condition">
+          <div
+            className="subcategory_condition"
+            style={{
+              display: BreadcrumbsList.length < 3 ? "block" : "none",
+            }}
+          >
             <span>カテゴリ</span>
             <ul>
               {categoryCountList.map((subcategory) => {
                 return (
                   <Link
                     key={subcategory.goodsCategoryId}
-                    to={`/itemlist/${goodsCategoryId}/${subcategory.goodsCategoryId}`}
-                    state={{
-                      parentCategoryName: parentCategoryName,
-                      childrenCategoryName: childrenCategoryName,
-                      subChildrenCategoryName: subcategory.categoryName,
-                    }}
+                    to={`/itemlist/${subcategory.goodsCategoryId}`}
+                    state={[
+                      ...BreadcrumbsList,
+                      {
+                        categoryId: subcategory.goodsCategoryId,
+                        categoryName: subcategory.categoryName,
+                      },
+                    ]}
                   >
                     <li>
                       <button className="subcategory_button">
@@ -296,6 +433,7 @@ const ItemList = () => {
               userSelectedCols,
               handleProperty,
               handleColClear,
+              handleColClearAll,
             }}
           >
             <Property level="2" />
@@ -360,12 +498,17 @@ const ItemList = () => {
 
         <div className="layout_body">
           <div className="layout_head">
-            <span>敷きパッド・ベッドパッド</span>
+            <span>
+              {BreadcrumbsList[BreadcrumbsList.length - 1].categoryName}
+            </span>
             <p>
               ニトリの敷きパッド・ベッドパッドです。シーツの上に敷く敷きパッドは、肌に直接触れるので、季節に合った機能・素材がお勧めです。シーツの下に敷くベッドパッドは、汗取りタイプと寝心地調整タイプ（マットレストッパー）がございます。
             </p>
             <p>
-              <button>敷きパッド・ベッドパッドの選び方</button>
+              <button>
+                {BreadcrumbsList[BreadcrumbsList.length - 1].categoryName}
+                の選び方
+              </button>
             </p>
           </div>
 

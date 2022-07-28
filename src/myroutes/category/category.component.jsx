@@ -111,22 +111,28 @@ const Category = () => {
                         </span>
                       </p>
                       <ul>
-                        {category.subList.map((list) => {
+                        {category.subList.map((childrenlist) => {
                           return (
                             <li
                               className="sub_category"
-                              key={list.categoryId}
+                              key={childrenlist.categoryId}
                               onClick={categoryDisappear}
                             >
                               <Link
-                                to={`/itemlist/${list.categoryId}`}
-                                state={{
-                                  parentCategoryName: category.categoryName,
-                                  childrenCategoryName: list.categoryName,
-                                }}
+                                to={`/itemlist/${childrenlist.categoryId}`}
+                                // state={[
+                                //   {
+                                //     categoryId: category.categoryId,
+                                //     categoryName: category.categoryName,
+                                //   },
+                                //   {
+                                //     categoryId: childrenlist.categoryId,
+                                //     categoryName: childrenlist.categoryName,
+                                //   },
+                                // ]}
                               >
-                                {list.categoryName}
-                                {list.categoryId}
+                                {childrenlist.categoryName}
+                                {childrenlist.categoryId}
                               </Link>
                             </li>
                           );
