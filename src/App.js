@@ -19,6 +19,7 @@ import Category from "./myroutes/category/category.component.jsx";
 import EcHome from "./myroutes/echome/echome.component.jsx";
 import ItemList from "./myroutes/itemlist/itemlist.component.jsx";
 import SubItemList from "./myroutes/subitemlist/subitemlist.component.jsx";
+import Product from "./myroutes/product/product.component.jsx";
 //-----------------------------------------------------------------------------------
 
 const Shop = () => {
@@ -31,6 +32,7 @@ const App = () => {
       <Route path="/" element={<Category />}>
         <Route index element={<EcHome />} />
         <Route path="itemlist/:categoryIdString" element={<ItemList />} />
+        <Route path="product" element={<Product />} />
         {/* <Route path="itemlist/:subCategoryIdString" element={<ItemList />} /> */}
         {/* <Route
           path="itemlist/:categoryIdString/:subCategoryIdString"
