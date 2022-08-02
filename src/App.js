@@ -3,6 +3,7 @@ import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
 import { useState, useEffect } from "react";
 import "./App.css";
+import "swiper/css/bundle";
 
 import TodoListExample from "./components/todolist/todolist-example";
 import TodoList from "./components/todolist/todolist.component";
