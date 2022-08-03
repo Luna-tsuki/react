@@ -23,6 +23,8 @@ import SubItemList from "./myroutes/subitemlist/subitemlist.component.jsx";
 import Product from "./myroutes/product/product.component.jsx";
 //-----------------------------------------------------------------------------------
 
+import JobSiteHome from "./jobsite/home/jobsitehome.component.jsx";
+
 const Shop = () => {
   return <h1>Shop</h1>;
 };
@@ -30,10 +32,13 @@ const Shop = () => {
 const App = () => {
   return (
     <Routes>
+      <Route path="/jobsite" element={<JobSiteHome />}></Route>
+
       <Route path="/" element={<Category />}>
         <Route index element={<EcHome />} />
         <Route path="itemlist/:categoryIdString" element={<ItemList />} />
         <Route path="product" element={<Product />} />
+
         {/* <Route path="itemlist/:subCategoryIdString" element={<ItemList />} /> */}
         {/* <Route
           path="itemlist/:categoryIdString/:subCategoryIdString"
